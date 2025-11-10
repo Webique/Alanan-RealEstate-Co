@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import LocaleSwitcher from "@/components/locale-switcher";
+import { Button } from "@/components/ui/button";
 import Logo from "@/components/ui/logo";
 import { siteConfig } from "@/config/site";
 import { Link } from "@/i18n/navigation.public";
@@ -80,15 +81,19 @@ export default function Header() {
             <LocaleSwitcher isTop={false} />
 
             <div className="flex items-center">
-              <Link
-                href={siteConfig.links.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="from-primary to-secondary hidden items-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:flex"
+              <Button
+                className="bg-primary hidden h-auto items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-6 lg:flex"
+                asChild
               >
-                <Phone className="size-4" />
-                {t("cta")}
-              </Link>
+                <Link
+                  href={siteConfig.links.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Phone className="size-4" />
+                  {t("cta")}
+                </Link>
+              </Button>
             </div>
           </m.div>
 

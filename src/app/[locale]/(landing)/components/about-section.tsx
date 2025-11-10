@@ -2,6 +2,7 @@
 
 import { Building2, Eye, Target } from "lucide-react";
 import * as m from "motion/react-m";
+import ExportedImage from "next-image-export-optimizer";
 import { useTranslations } from "next-intl";
 
 export default function AboutSection() {
@@ -63,14 +64,16 @@ export default function AboutSection() {
           >
             {/* Company Image */}
             <m.div
-              className="overflow-hidden rounded-2xl shadow-lg"
+              className="relative h-64 overflow-hidden rounded-2xl shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <img
+              <ExportedImage
                 src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"
                 alt="Anan Real Estate"
-                className="h-64 w-full object-cover"
+                fill
+                className="object-cover"
+                unoptimized
               />
             </m.div>
 

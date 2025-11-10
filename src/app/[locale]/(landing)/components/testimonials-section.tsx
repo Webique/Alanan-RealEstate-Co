@@ -2,6 +2,7 @@
 
 import { Quote, Star } from "lucide-react";
 import * as m from "motion/react-m";
+import ExportedImage from "next-image-export-optimizer";
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -121,11 +122,15 @@ export default function TestimonialsSection() {
 
                 {/* Client Info */}
                 <div className="border-border flex items-center gap-4 border-t pt-6">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="h-14 w-14 rounded-full object-cover"
-                  />
+                  <div className="relative h-14 w-14 overflow-hidden rounded-full">
+                    <ExportedImage
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </div>
                   <div>
                     <h4 className="text-foreground font-bold">
                       {testimonial.name}

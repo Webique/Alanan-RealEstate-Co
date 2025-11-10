@@ -14,8 +14,8 @@ type indexProps = {
 
 export default function Logo({
   src = "/images/logo.png",
-  width = 128,
-  height = 128,
+  width = 150,
+  height = 100,
   className,
   imgClassName,
   href = "/"
@@ -28,7 +28,7 @@ export default function Logo({
     >
       <ExportedImage
         className={cn(
-          "h-auto w-24 max-w-full overflow-hidden sm:w-32",
+          "h-auto w-20 max-w-full overflow-hidden sm:w-24",
           imgClassName
         )}
         src={src}

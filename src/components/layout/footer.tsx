@@ -4,8 +4,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 
-import Instagram from "@/assets/icons/instagram.svg";
-import TickTock from "@/assets/icons/tiktok.svg";
 import Logo from "@/components/ui/logo";
 import { siteConfig } from "@/config/site";
 
@@ -20,147 +18,191 @@ const Footer = () => {
     { label: t("contactUs"), href: "#contact" }
   ];
 
-  const socialLinks = [
-    {
-      icon: Instagram,
-      href: siteConfig.links.instagram,
-      label: t("socialMedia.instagram")
-    },
-    {
-      icon: TickTock,
-      href: siteConfig.links.tiktok,
-      label: t("socialMedia.tiktok")
-    },
-    {
-      icon: Mail,
-      href: `mailto:${siteConfig.support.email}`,
-      label: t("socialMedia.email")
-    },
-    {
-      icon: Phone,
-      href: `tel:${siteConfig.support.phone}`,
-      label: "Phone"
-    },
-    {
-      icon: MapPin,
-      href: siteConfig.links.googleMap,
-      label: "Location"
-    }
+  const services = [
+    { label: t("realEstateServices"), href: "#services" },
+    { label: t("propertyManagement"), href: "#services" },
+    { label: t("realEstateMarketing"), href: "#services" },
+    { label: t("realEstateConsulting"), href: "#services" }
   ];
 
+  // const socialLinks = [
+  //   {
+  //     icon: Instagram,
+  //     href: siteConfig.links.instagram,
+  //     label: t("socialMedia.instagram"),
+  //     target: "_blank"
+  //   },
+  //   {
+  //     icon: TickTock,
+  //     href: siteConfig.links.tiktok,
+  //     label: t("socialMedia.tiktok"),
+  //     target: "_blank"
+  //   },
+  //   {
+  //     icon: Mail,
+  //     href: `mailto:${siteConfig.support.email}`,
+  //     label: t("socialMedia.email"),
+  //     target: "_blank"
+  //   },
+  //   {
+  //     icon: Phone,
+  //     href: `tel:${siteConfig.support.phone}`,
+  //     label: "Phone",
+  //     target: "_self"
+  //   },
+  //   {
+  //     icon: MapPin,
+  //     href: siteConfig.links.googleMap,
+  //     label: "Location",
+  //     target: "_blank"
+  //   }
+  // ];
+
   return (
-    <footer className="from-primary via-primary/95 to-primary/90 bg-secondary bg-gradient-to-b text-white">
+    <footer className="from-secondary to-secondary/98 bg-gradient-to-b text-white">
       <div className="layout px-4 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
-          <div className="flex flex-col space-y-6">
-            <Logo />
-            <p className="text-sm leading-relaxed text-white/80">
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col space-y-5"
+          >
+            <Logo
+              imgClassName="invert w-32 lg:w-40 brightness-0 saturate-0"
+              className="lg:ps-5"
+            />
+            <p className="text-sm leading-relaxed text-gray-400">
               {t("companyDescription")}
             </p>
-          </div>
+          </m.div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="mb-6 text-lg font-bold text-white">
-              {t("quickLinks")}
-            </h3>
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="mb-6 text-lg font-bold">{t("quickLinks")}</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link.label}>
+                <m.li
+                  key={link.label}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <a
                     href={link.href}
-                    className="group flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+                    className="text-sm text-gray-400 transition-colors hover:text-white"
                   >
-                    <span className="bg-secondary h-1 w-1 rounded-full transition-all group-hover:w-2" />
                     {link.label}
                   </a>
-                </li>
+                </m.li>
               ))}
             </ul>
-          </div>
+          </m.div>
+
+          {/* Services */}
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="mb-6 text-lg font-bold">{t("services")}</h3>
+            <ul className="space-y-3">
+              {services.map((service) => {
+                return (
+                  <m.li
+                    key={service.label}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <a
+                      href={service.href}
+                      className="text-sm text-gray-400 transition-colors hover:text-white"
+                    >
+                      {service.label}
+                    </a>
+                  </m.li>
+                );
+              })}
+            </ul>
+          </m.div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="mb-6 text-lg font-bold text-white">
-              {t("contactUs")}
-            </h3>
-            <div className="space-y-3">
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="mb-6 text-lg font-bold">{t("contactUs")}</h3>
+            <div className="space-y-4">
               <a
                 href={`tel:${siteConfig.support.phone}`}
-                className="group flex items-center gap-3 rounded-lg bg-white/5 p-3 text-sm text-white/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
+                className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
               >
-                <div className="bg-secondary/20 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <Phone className="text-secondary h-4 w-4" />
-                </div>
+                <Phone className="mt-1 h-4 w-4 shrink-0" />
                 <span dir="ltr">{siteConfig.support.phone}</span>
               </a>
               <a
                 href={`mailto:${siteConfig.support.email}`}
-                className="group flex items-center gap-3 rounded-lg bg-white/5 p-3 text-sm text-white/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
+                className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="bg-secondary/20 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <Mail className="text-secondary h-4 w-4" />
-                </div>
-                <span className="break-all">{siteConfig.support.email}</span>
+                <Mail className="mt-1 h-4 w-4 shrink-0" />
+                <span>{siteConfig.support.email}</span>
               </a>
-              <a
-                href={siteConfig.links.googleMap}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 rounded-lg bg-white/5 p-3 text-sm text-white/80 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white"
-              >
-                <div className="bg-secondary/20 flex h-8 w-8 items-center justify-center rounded-lg">
-                  <MapPin className="text-secondary h-4 w-4" />
-                </div>
+              <div className="flex items-start gap-3 text-sm text-gray-400">
+                <MapPin className="mt-1 h-4 w-4 shrink-0" />
                 <span>{t("saudiArabia")}</span>
-              </a>
+              </div>
             </div>
-          </div>
 
-          {/* Social Links */}
-          <div>
-            <h4 className="mb-6 text-lg font-bold text-white">
-              تابعونا | Follow Us
-            </h4>
-            <div className="flex flex-wrap gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <m.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:bg-secondary flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white backdrop-blur-sm transition-all"
-                    aria-label={social.label}
-                    title={social.label}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </m.a>
-                );
-              })}
-            </div>
-          </div>
+            {/* Social Links */}
+            {/* <div className="mt-6">
+              <div className="flex gap-3">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <m.a
+                      key={social.label}
+                      href={social.href}
+                      target={social.target}
+                      rel="noopener noreferrer"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-gray-400 transition-all hover:bg-white/20"
+                      aria-label={social.label}
+                      title={social.label}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </m.a>
+                  );
+                })}
+              </div>
+            </div> */}
+          </m.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 border-t border-white/10 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-white/70">
-              {t("copyright", { year: currentYear })}
-            </p>
-            <div className="flex items-center gap-2 text-xs text-white/60">
-              <span>Made with</span>
-              <span className="text-secondary">❤</span>
-              <span>in Saudi Arabia</span>
-            </div>
-          </div>
-        </div>
+        <m.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-12 border-t border-gray-800 pt-8 text-center"
+        >
+          <p className="text-sm text-gray-400">
+            {t("copyright", { year: currentYear })}
+          </p>
+        </m.div>
       </div>
     </footer>
   );

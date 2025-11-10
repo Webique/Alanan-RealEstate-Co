@@ -1,219 +1,208 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import * as m from "motion/react-m";
+import { ArrowRight, Building2 } from "lucide-react";
+import { motion } from "motion/react";
+import ExportedImage from "next-image-export-optimizer";
 import { useTranslations } from "next-intl";
 
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
 export default function HeroSection() {
   const t = useTranslations("IndexPage.Hero");
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8 }
+    }
+  };
+
   return (
-    <section className="relative min-h-screen w-full overflow-hidden pt-20">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
+    <section className="relative h-screen min-h-[600px] w-full overflow-hidden lg:min-h-[700px]">
+      {/* Background Image with Zoom Animation */}
+      <motion.div
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 z-0"
+      >
+        <ExportedImage
           src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1920&q=80"
           alt="Real Estate Background"
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover brightness-50"
+          priority
+          unoptimized
         />
-        <div className="from-primary via-primary/95 to-secondary absolute inset-0 bg-gradient-to-br opacity-90" />
+      </motion.div>
+
+      {/* Gradient Overlays */}
+      <div className="from-primary/30 via-primary/20 absolute inset-0 z-10 bg-gradient-to-br to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+      {/* Animated Light Orbs */}
+      <div className="absolute inset-0 z-10 mix-blend-screen">
+        <motion.div
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-[#1E488F]/30 blur-[100px] sm:h-96 sm:w-96"
+        />
+        <motion.div
+          animate={{
+            opacity: [0.15, 0.35, 0.15],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+          className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-[#1E488F]/25 blur-[100px] sm:h-96 sm:w-96"
+        />
       </div>
 
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="bg-grid-pattern absolute inset-0" />
-      </div>
+      {/* Main Content */}
+      <div className="relative z-20 flex h-full flex-col items-center justify-center px-4 pb-24 pt-20 text-center text-white sm:px-6">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="mx-auto max-w-5xl"
+        >
+          {/* License Badge */}
+          <motion.div variants={itemVariants} className="mb-8 inline-flex">
+            <div className="group relative">
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-white/30 to-white/10 opacity-50 blur transition duration-300 group-hover:opacity-70" />
+              <div className="relative flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 shadow-2xl backdrop-blur-sm">
+                <Building2 className="h-5 w-5 text-white" />
+                <span className="text-sm font-semibold text-white">
+                  {t("subtitle")}
+                </span>
+              </div>
+            </div>
+          </motion.div>
 
-      {/* Animated Shapes */}
-      <m.div
-        className="bg-secondary/20 absolute -right-20 top-20 h-96 w-96 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <m.div
-        className="bg-accent/20 absolute -left-20 bottom-20 h-96 w-96 rounded-full blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.5, 0.3, 0.5]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
-      {/* Content */}
-      <div className="layout relative z-10 flex min-h-screen items-center py-20">
-        <div className="grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Text Content */}
-          <m.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col justify-center space-y-8"
+          {/* Main Title */}
+          <motion.h1
+            variants={itemVariants}
+            className="mb-6 text-4xl font-bold leading-tight text-white drop-shadow-2xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-block"
-            >
-              <span className="rounded-full bg-white/10 px-6 py-2 text-sm font-medium text-white backdrop-blur-sm">
-                {t("subtitle")}
-              </span>
-            </m.div>
+            {t("title")}
+          </motion.h1>
 
-            <m.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
-            >
-              {t("title")}
-            </m.h1>
+          {/* Description */}
+          <motion.p
+            variants={itemVariants}
+            className="mx-auto mb-12 max-w-3xl text-base leading-relaxed text-white/90 drop-shadow-lg sm:text-lg md:text-xl"
+          >
+            {t("description")}
+          </motion.p>
 
-            <m.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg leading-relaxed text-white/90 md:text-xl"
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <Button
+              className="border-primary hover:border-primary/90 h-auto rounded-full border-2 px-8 py-4 text-base font-bold shadow-2xl has-[>svg]:px-5 sm:px-10 sm:py-4 sm:text-lg sm:has-[>svg]:px-5"
+              asChild
             >
-              {t("description")}
-            </m.p>
-
-            <m.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-col gap-4 sm:flex-row"
-            >
-              <m.a
+              {/* Primary CTA */}
+              <motion.a
                 href={siteConfig.links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary group flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold shadow-xl transition-all hover:scale-105 hover:shadow-2xl"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
+                className="group relative"
               >
                 {t("cta")}
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </m.a>
-
-              <m.a
+                <ArrowRight className="size-5 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+              </motion.a>
+            </Button>
+            {/* Secondary CTA */}
+            <Button
+              className="relative h-auto rounded-full border-2 border-white/70 bg-white/10 px-8 py-4 text-base font-bold text-white shadow-2xl backdrop-blur-sm transition-all hover:border-white hover:bg-white/20 sm:px-10 sm:py-4 sm:text-lg"
+              asChild
+            >
+              <motion.a
                 href="#about"
-                className="flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
+                className="group relative"
               >
                 {t("learnMore")}
-              </m.a>
-            </m.div>
-          </m.div>
+              </motion.a>
+            </Button>
+          </motion.div>
+        </motion.div>
+      </div>
 
-          {/* Image/Illustration Side */}
-          <m.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-            className="relative hidden lg:flex lg:items-center lg:justify-center"
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 sm:bottom-10"
+      >
+        <motion.a href="#about" className="flex flex-col items-center gap-2">
+          <motion.span
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-xs font-medium uppercase tracking-widest text-white/80 sm:text-sm"
           >
-            <m.div
-              className="relative h-[500px] w-full"
-              animate={{
-                y: [0, -20, 0]
-              }}
+            {t("scrollText")}
+          </motion.span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/50 p-1 backdrop-blur-sm hover:border-white"
+          >
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
               transition={{
-                duration: 6,
+                duration: 2,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-            >
-              {/* Decorative Cards */}
-              <m.div
-                className="absolute left-0 top-20 w-64 rounded-2xl bg-white/10 p-6 backdrop-blur-md"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <div className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full">
-                    <span className="text-2xl">🏠</span>
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/70">شراء عقار</p>
-                    <p className="text-lg font-bold text-white">
-                      Property Purchase
-                    </p>
-                  </div>
-                </div>
-              </m.div>
+              className="h-2 w-2 rounded-full bg-white"
+            />
+          </motion.div>
+        </motion.a>
+      </motion.div>
 
-              <m.div
-                className="absolute bottom-20 right-0 w-64 rounded-2xl bg-white/10 p-6 backdrop-blur-md"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <div className="bg-accent flex h-12 w-12 items-center justify-center rounded-full">
-                    <span className="text-2xl">🏗️</span>
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/70">بناء ذاتي</p>
-                    <p className="text-lg font-bold text-white">
-                      Self-Construction
-                    </p>
-                  </div>
-                </div>
-              </m.div>
-
-              <m.div
-                className="absolute left-1/2 top-1/2 w-72 -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-white/10 p-6 backdrop-blur-md"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.6 }}
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
-                    <span className="text-2xl">✅</span>
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/70">متوافق مع الشريعة</p>
-                    <p className="text-lg font-bold text-white">
-                      Sharia-Compliant
-                    </p>
-                  </div>
-                </div>
-              </m.div>
-            </m.div>
-          </m.div>
-        </div>
-      </div>
-
-      {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            fill="hsl(var(--background))"
-          />
-        </svg>
-      </div>
+      {/* Bottom Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-black/50 to-transparent" />
     </section>
   );
 }

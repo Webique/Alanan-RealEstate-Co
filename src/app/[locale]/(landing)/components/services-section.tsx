@@ -9,6 +9,7 @@ import {
     TrendingUp
 } from "lucide-react";
 import * as m from "motion/react-m";
+import ExportedImage from "next-image-export-optimizer";
 import { useTranslations } from "next-intl";
 
 import { siteConfig } from "@/config/site";
@@ -125,10 +126,12 @@ export default function ServicesSection() {
                 >
                   {/* Image Header */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <ExportedImage
                       src={service.image}
                       alt={service.title}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform group-hover:scale-110"
+                      unoptimized
                     />
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-60`}

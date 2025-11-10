@@ -2,6 +2,7 @@
 
 import { CheckCircle, FileText, MessageSquare, PhoneCall } from "lucide-react";
 import * as m from "motion/react-m";
+import ExportedImage from "next-image-export-optimizer";
 
 export default function ProcessSection() {
   const steps = [
@@ -102,10 +103,12 @@ export default function ProcessSection() {
                 >
                   {/* Image Background */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
+                    <ExportedImage
                       src={step.image}
                       alt={step.titleAr}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform group-hover:scale-110"
+                      unoptimized
                     />
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-80`}

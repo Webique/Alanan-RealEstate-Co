@@ -2,11 +2,9 @@
 
 import { Calculator, FileText, HandshakeIcon } from "lucide-react";
 import * as m from "motion/react-m";
-import { useTranslations } from "next-intl";
+import ExportedImage from "next-image-export-optimizer";
 
 export default function SolutionsTypesSection() {
-  const t = useTranslations("IndexPage.SolutionsTypes");
-
   const solutionCategories = [
     {
       icon: Calculator,
@@ -137,10 +135,12 @@ export default function SolutionsTypesSection() {
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <img
+                    <ExportedImage
                       src={category.image}
                       alt={category.titleAr}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
+                      unoptimized
                     />
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-20`}
