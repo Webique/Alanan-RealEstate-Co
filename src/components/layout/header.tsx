@@ -174,16 +174,20 @@ export default function Header() {
                 transition={{ delay: 0.5, duration: 0.4 }}
                 className="border-t pt-4"
               >
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={siteConfig.links.whatsapp}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="from-primary to-secondary flex items-center justify-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                <Button
+                  className="bg-primary h-auto w-full items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-6"
+                  asChild
                 >
-                  <Phone className="size-4" />
-                  {t("cta")}
-                </a>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={siteConfig.links.whatsapp}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Phone className="size-4" />
+                    {t("cta")}
+                  </a>
+                </Button>
               </m.div>
             </div>
           </nav>
