@@ -29,9 +29,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-bg": "var(--primary)",
           "--normal-text": "var(--primary-foreground)",
           "--normal-border": "var(--primary)",
-          "--border-radius": "var(--radius)",
-          "--toast-title-font-size": "1rem",
-          "--toast-title-font-weight": "600"
+          "--border-radius": "var(--radius)"
         } as React.CSSProperties
       }
       position="top-center"
