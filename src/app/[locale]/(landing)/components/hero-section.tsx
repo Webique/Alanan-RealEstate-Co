@@ -79,7 +79,7 @@ export default function HeroSection() {
             ease: "easeInOut",
             delay: 1
           }}
-          className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-[#1E488F]/25 blur-[100px] sm:h-96 sm:w-96"
+          className="absolute bottom-1/4 end-1/4 h-64 w-64 rounded-full bg-[#1E488F]/25 blur-[100px] sm:h-96 sm:w-96"
         />
       </div>
 
@@ -202,7 +202,7 @@ export default function HeroSection() {
       </m.div>
 
       {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-black/50 to-transparent" />
+      <div className="absolute bottom-0 end-0 start-0 z-10 h-32 bg-gradient-to-t from-black/50 to-transparent" />
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { ArrowRight, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -21,24 +22,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 
 const createFormSchema = (t: any) =>
-  z.object({
-    name: z.string().min(2, {
-      message: t("form.validation.nameMin")
-    }),
-    phone: z.string().min(10, {
-      message: t("form.validation.phoneMin")
-    }),
-    email: z
-      .string()
-      .email({
-        message: t("form.validation.emailInvalid")
+  z
+    .object({
+      name: z.string().min(2, {
+        message: t("form.validation.nameMin")
+      }),
+      phone: z.string().optional().or(z.literal("")),
+      email: z
+        .string()
+        .email({
+          message: t("form.validation.emailInvalid")
+        })
+        .optional()
+        .or(z.literal("")),
+      message: z.string().min(10, {
+        message: t("form.validation.messageMin")
       })
-      .optional()
-      .or(z.literal("")),
-    message: z.string().min(10, {
-      message: t("form.validation.messageMin")
     })
-  });
+    .refine((data) => data.phone || data.email, {
+      message: t("form.validation.contactRequired"),
+      path: ["phone"]
+    });
 
 export default function ContactSection() {
   const t = useTranslations("IndexPage.Contact");
@@ -57,38 +61,90 @@ export default function ContactSection() {
   });
 
   const onSubmit = async (values: FormValues) => {
-    // Simulate submission delay
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      const promises: Promise<any>[] = [];
+      const methods: string[] = [];
 
-    const emailPart = values.email
-      ? `%0A${t("form.whatsapp.email")}: ${values.email}`
-      : "";
-    const whatsappMessage = `${t("form.whatsapp.name")}: ${values.name}%0A${t("form.whatsapp.phone")}: ${values.phone}${emailPart}%0A${t("form.whatsapp.request")}: ${values.message}`;
-    window.open(
-      `https://wa.me/${siteConfig.support.whatsapp}?text=${whatsappMessage}`,
-      "_blank"
-    );
+      // Send via CallMeBot if phone is provided
+      if (values.phone) {
+        const apiKey = process.env.NEXT_PUBLIC_CALLMEBOT_API_KEY;
+        const whatsappNumber = process.env.NEXT_PUBLIC_CALLMEBOT_PHONE_NUMBER;
 
-    form.reset();
+        if (apiKey && whatsappNumber) {
+          const emailPart = values.email
+            ? `\n${t("form.emailLabel")}: ${values.email}`
+            : "";
+          const whatsappMessage = `🔔 ${t("form.whatsappTitle")}\n\n${t("form.nameLabel")}: ${values.name}\n${t("form.phoneLabel")}: ${values.phone}${emailPart}\n${t("form.messageLabel")}: ${values.message}`;
+          const callMeBotUrl = `https://api.callmebot.com/whatsapp.php?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}&apikey=${apiKey}`;
+
+          promises.push(fetch(callMeBotUrl, { mode: "no-cors" }));
+          methods.push(t("form.whatsappMethod"));
+        }
+      }
+
+      // Send via FormSubmit if email is provided
+      if (values.email) {
+        const formSubmitEmail = process.env.NEXT_PUBLIC_FORMSUBMIT_EMAIL;
+
+        if (formSubmitEmail) {
+          const formData = new FormData();
+          formData.append("name", values.name);
+          formData.append("email", values.email);
+          if (values.phone) formData.append("phone", values.phone);
+          formData.append("message", values.message);
+          formData.append("_subject", t("form.emailSubject"));
+          formData.append("_captcha", "false");
+          formData.append("_template", "table");
+
+          promises.push(
+            fetch(`https://formsubmit.co/${formSubmitEmail}`, {
+              method: "POST",
+              body: formData
+            })
+          );
+          methods.push(t("form.emailMethod"));
+        }
+      }
+
+      // Wait for all submissions to complete
+      await Promise.all(promises);
+
+      // Show success message with methods used
+      const methodText = methods.join(" & ");
+      const successMsg = t("form.success");
+      const sentViaMsg = t("form.sentVia");
+
+      toast.success(successMsg, {
+        description: `${sentViaMsg}: ${methodText}`,
+        duration: 5000
+      });
+
+      form.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error(t("form.error"), {
+        duration: 5000
+      });
+    }
   };
 
   const contactInfo = [
     {
       icon: Phone,
-      title: t("info.phone" as any),
+      title: t("info.phone"),
       value: siteConfig.support.phone,
       href: `tel:${siteConfig.support.phone}`
     },
     {
       icon: Mail,
-      title: t("info.email" as any),
+      title: t("info.email"),
       value: siteConfig.support.email,
       href: `mailto:${siteConfig.support.email}`
     },
     {
       icon: MapPin,
-      title: t("info.location" as any),
-      value: t("info.address" as any),
+      title: t("info.location"),
+      value: t("info.address"),
       href: siteConfig.links.googleMap
     }
   ];
@@ -109,8 +165,8 @@ export default function ContactSection() {
       </div>
 
       {/* Decorative Blobs */}
-      <div className="bg-primary/10 absolute -left-20 top-20 h-72 w-72 rounded-full blur-3xl" />
-      <div className="bg-primary/10 absolute -right-20 bottom-20 h-72 w-72 rounded-full blur-3xl" />
+      <div className="bg-primary/10 absolute -start-20 top-20 h-72 w-72 rounded-full blur-3xl" />
+      <div className="bg-primary/10 absolute -end-20 bottom-20 h-72 w-72 rounded-full blur-3xl" />
 
       <div className="layout relative">
         {/* Section Header */}
@@ -189,10 +245,10 @@ export default function ContactSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="border-border/50 bg-card/50 relative overflow-hidden rounded-3xl border p-8 shadow-2xl backdrop-blur-sm lg:p-12">
+            <div className="border-border/50 bg-card/50 relative mx-auto max-w-2xl overflow-hidden rounded-3xl border p-8 shadow-2xl backdrop-blur-sm lg:p-12">
               {/* Decorative gradient */}
-              <div className="bg-primary/10 absolute -right-20 -top-20 h-40 w-40 rounded-full blur-3xl" />
-              <div className="bg-primary/10 absolute -bottom-20 -left-20 h-40 w-40 rounded-full blur-3xl" />
+              <div className="bg-primary/10 absolute -end-20 -top-20 h-40 w-40 rounded-full blur-3xl" />
+              <div className="bg-primary/10 absolute -bottom-20 -start-20 h-40 w-40 rounded-full blur-3xl" />
 
               <div className="relative">
                 <Form {...form}>
@@ -200,6 +256,15 @@ export default function ContactSection() {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                   >
+                    {/* Helper Text */}
+                    <div className="bg-primary/5 border-primary/20 mb-4 rounded-xl border p-4">
+                      <p className="text-muted-foreground text-center text-sm">
+                        <span className="text-primary font-semibold">
+                          {t("form.contactNote")}
+                        </span>
+                      </p>
+                    </div>
+
                     <div className="grid gap-6 sm:grid-cols-2">
                       {/* Name Field */}
                       <FormField
@@ -227,15 +292,23 @@ export default function ContactSection() {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t("form.phone")}</FormLabel>
+                            <FormLabel>
+                              {t("form.phone")}{" "}
+                              <span className="text-muted-foreground text-xs">
+                                ({t("form.optional")})
+                              </span>
+                            </FormLabel>
                             <FormControl>
-                              <Input
-                                type="tel"
-                                placeholder={t("form.phone")}
-                                {...field}
-                                disabled={form.formState.isSubmitting}
-                                className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl transition-all"
-                              />
+                              <div className="relative">
+                                <Phone className="text-muted-foreground absolute end-4 top-1/2 h-4 w-4 -translate-y-1/2" />
+                                <Input
+                                  type="tel"
+                                  placeholder={t("form.phone")}
+                                  {...field}
+                                  disabled={form.formState.isSubmitting}
+                                  className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl ps-11 transition-all"
+                                />
+                              </div>
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -256,13 +329,16 @@ export default function ContactSection() {
                             </span>
                           </FormLabel>
                           <FormControl>
-                            <Input
-                              type="email"
-                              placeholder={t("form.email")}
-                              {...field}
-                              disabled={form.formState.isSubmitting}
-                              className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl transition-all"
-                            />
+                            <div className="relative">
+                              <Mail className="text-muted-foreground absolute start-4 top-1/2 h-4 w-4 -translate-y-1/2" />
+                              <Input
+                                type="email"
+                                placeholder={t("form.email")}
+                                {...field}
+                                disabled={form.formState.isSubmitting}
+                                className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl ps-11 transition-all"
+                              />
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -301,7 +377,7 @@ export default function ContactSection() {
                         className="from-primary to-primary/80 hover:shadow-primary/20 group h-auto w-full rounded-xl bg-gradient-to-r px-8 py-4 text-base font-semibold shadow-lg transition-all hover:shadow-xl"
                       >
                         {form.formState.isSubmitting ? (
-                          <span>{t("form.submitting" as any)}</span>
+                          <span>{t("form.submitting")}</span>
                         ) : (
                           <>
                             {t("form.submit")}

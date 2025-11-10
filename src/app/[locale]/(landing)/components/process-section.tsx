@@ -104,7 +104,7 @@ export default function ProcessSection() {
                     <div className="from-primary/30 to-primary/20 absolute inset-0 bg-gradient-to-br" />
 
                     {/* Step Number */}
-                    <div className="absolute right-4 top-4">
+                    <div className="absolute end-4 top-4">
                       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
                         <span className="text-2xl font-bold text-white">
                           {step.number}
@@ -113,7 +113,7 @@ export default function ProcessSection() {
                     </div>
 
                     {/* Icon */}
-                    <div className="absolute bottom-4 left-4">
+                    <div className="absolute bottom-4 start-4">
                       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg">
                         <Icon className="text-primary h-7 w-7" />
                       </div>
@@ -136,7 +136,7 @@ export default function ProcessSection() {
 
                 {/* Connector Line (except for last item on desktop) */}
                 {index < steps.length - 1 && (
-                  <div className="from-primary to-primary/50 absolute -right-4 top-24 hidden h-0.5 w-8 bg-gradient-to-r lg:block" />
+                  <div className="from-primary to-primary/50 absolute -end-4 top-24 hidden h-0.5 w-8 bg-gradient-to-r lg:block" />
                 )}
               </m.div>
             );

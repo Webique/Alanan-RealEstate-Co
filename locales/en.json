@@ -215,17 +215,24 @@
         "submitting": "Submitting...",
         "optional": "optional",
         "privacy": "By clicking submit request, you agree to the Privacy Policy",
+        "contactNote": "Please provide at least phone or email",
+        "success": "Message sent successfully!",
+        "error": "Failed to send message. Please try again.",
+        "sentVia": "Sent via",
+        "whatsappMethod": "WhatsApp",
+        "emailMethod": "Email",
+        "emailSubject": "New Contact Form Submission",
+        "whatsappTitle": "New Contact Form",
+        "nameLabel": "Name",
+        "phoneLabel": "Phone",
+        "emailLabel": "Email",
+        "messageLabel": "Message",
         "validation": {
           "nameMin": "Name must be at least 2 characters",
           "phoneMin": "Please enter a valid phone number",
           "emailInvalid": "Please enter a valid email address",
-          "messageMin": "Message must be at least 10 characters"
-        },
-        "whatsapp": {
-          "name": "Name",
-          "phone": "Phone",
-          "email": "Email",
-          "request": "Request"
+          "messageMin": "Message must be at least 10 characters",
+          "contactRequired": "Please provide either phone number or email address"
         }
       },
       "info": {
