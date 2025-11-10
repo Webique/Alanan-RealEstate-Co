@@ -41,6 +41,36 @@
         "properties": "Properties Financed"
       }
     },
+    "Features": {
+      "title": "Why Choose Anan?",
+      "subtitle": "Features that make us the optimal choice for you",
+      "items": {
+        "sharia": {
+          "title": "Sharia-Compliant",
+          "description": "All our solutions are 100% Sharia-compliant"
+        },
+        "team": {
+          "title": "Professional Team",
+          "description": "Highly competent and experienced team"
+        },
+        "speed": {
+          "title": "Fast Service",
+          "description": "We work on your request as quickly as possible"
+        },
+        "experience": {
+          "title": "5 Years Experience",
+          "description": "Extensive experience in real estate consulting"
+        },
+        "solutions": {
+          "title": "Diverse Solutions",
+          "description": "Solutions for all segments of society"
+        },
+        "prices": {
+          "title": "Best Prices",
+          "description": "Lowest profit margin and down payment savings"
+        }
+      }
+    },
     "Services": {
       "title": "Our Products",
       "subtitle": "Choose the solution that suits your needs from real estate brokerage solutions",

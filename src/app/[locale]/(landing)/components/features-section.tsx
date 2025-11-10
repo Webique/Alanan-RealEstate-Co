@@ -2,62 +2,52 @@
 
 import { Award, CheckCircle, Clock, Shield, Users, Zap } from "lucide-react";
 import * as m from "motion/react-m";
+import { useTranslations } from "next-intl";
 
 export default function FeaturesSection() {
+  const t = useTranslations("IndexPage.Features");
+
   const features = [
     {
       icon: Shield,
-      titleAr: "متوافق مع الشريعة",
-      titleEn: "Sharia-Compliant",
-      descriptionAr: "جميع حلولنا متوافقة 100% مع أحكام الشريعة الإسلامية",
-      descriptionEn: "All our solutions are 100% Sharia-compliant",
-      gradient: "from-green-500 to-emerald-500"
+      key: "sharia"
     },
     {
       icon: Users,
-      titleAr: "فريق محترف",
-      titleEn: "Professional Team",
-      descriptionAr: "فريق عمل على قدر كبير من الكفاءة والخبرة",
-      descriptionEn: "Highly competent and experienced team",
-      gradient: "from-blue-500 to-cyan-500"
+      key: "team"
     },
     {
       icon: Clock,
-      titleAr: "خدمة سريعة",
-      titleEn: "Fast Service",
-      descriptionAr: "نعمل على طلبك في أسرع وقت ممكن",
-      descriptionEn: "We work on your request as quickly as possible",
-      gradient: "from-purple-500 to-pink-500"
+      key: "speed"
     },
     {
       icon: Award,
-      titleAr: "خبرة 5 سنوات",
-      titleEn: "5 Years Experience",
-      descriptionAr: "خبرة واسعة في مجال الاستشارات العقارية",
-      descriptionEn: "Extensive experience in real estate consulting",
-      gradient: "from-orange-500 to-red-500"
+      key: "experience"
     },
     {
       icon: CheckCircle,
-      titleAr: "حلول متنوعة",
-      titleEn: "Diverse Solutions",
-      descriptionAr: "حلول لكافة شرائح المجتمع واحتياجاتهم",
-      descriptionEn: "Solutions for all segments of society",
-      gradient: "from-indigo-500 to-blue-500"
+      key: "solutions"
     },
     {
       icon: Zap,
-      titleAr: "أفضل الأسعار",
-      titleEn: "Best Prices",
-      descriptionAr: "أقل هامش ربح وتوفير للدفعة الأولى",
-      descriptionEn: "Lowest profit margin and down payment savings",
-      gradient: "from-yellow-500 to-orange-500"
+      key: "prices"
     }
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 py-20 lg:py-32">
-      <div className="layout">
+    <section className="bg-muted/30 relative overflow-hidden py-20 lg:py-32">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E488F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}
+        />
+      </div>
+
+      <div className="layout relative">
+        {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,53 +55,57 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-6 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            <span className="block">لماذا تختار عنان؟</span>
-            <span className="block text-2xl text-muted-foreground md:text-3xl">
-              Why Choose Anan?
-            </span>
+          <m.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-6 py-2 text-sm font-semibold"
+          >
+            {t("subtitle")}
+          </m.span>
+          <h2 className="text-foreground text-3xl font-bold md:text-4xl lg:text-5xl">
+            {t("title")}
           </h2>
         </m.div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Features Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <m.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="group"
               >
                 <m.div
-                  className="relative h-full rounded-2xl bg-card p-8 shadow-lg transition-all hover:shadow-2xl"
-                  whileHover={{ y: -8 }}
+                  className="bg-card relative h-full overflow-hidden rounded-2xl p-8 shadow-lg transition-all hover:shadow-xl"
+                  whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
+                  {/* Subtle gradient overlay on hover */}
+                  <div className="from-primary/5 to-primary/10 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  {/* Icon */}
                   <m.div
-                    className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.gradient} shadow-lg`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="bg-primary/10 mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl"
+                    whileHover={{ scale: 1.1 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
-                    <Icon className="h-8 w-8 text-white" />
+                    <Icon className="text-primary h-8 w-8" />
                   </m.div>
 
-                  <h3 className="mb-2 text-xl font-bold text-foreground">
-                    {feature.titleAr}
+                  {/* Content */}
+                  <h3 className="text-foreground mb-3 text-xl font-bold">
+                    {t(`items.${feature.key}.title` as any)}
                   </h3>
-                  <p className="mb-3 text-sm font-semibold text-muted-foreground">
-                    {feature.titleEn}
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t(`items.${feature.key}.description` as any)}
                   </p>
-                  <p className="mb-2 text-sm leading-relaxed text-muted-foreground">
-                    {feature.descriptionAr}
-                  </p>
-                  <p className="text-xs leading-relaxed text-muted-foreground/70">
-                    {feature.descriptionEn}
-                  </p>
-
-                  <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 transition-opacity group-hover:opacity-100" />
                 </m.div>
               </m.div>
             );

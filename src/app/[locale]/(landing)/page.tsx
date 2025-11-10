@@ -6,6 +6,7 @@ import { use } from "react";
 import WhatsAppFloat from "@/components/whats-app-float";
 
 import AboutSection from "./components/about-section";
+import FeaturesSection from "./components/features-section";
 import HeroSection from "./components/hero-section";
 
 export default function IndexPage({ params }: PageProps<"/[locale]">) {
@@ -18,7 +19,7 @@ export default function IndexPage({ params }: PageProps<"/[locale]">) {
     <main>
       <HeroSection />
       <AboutSection />
-      {/* <FeaturesSection /> */}
+      <FeaturesSection />
       {/* <ServicesSection /> */}
       {/* <SolutionsTypesSection /> */}
       {/* <ProcessSection /> */}
