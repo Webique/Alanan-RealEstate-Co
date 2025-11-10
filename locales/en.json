@@ -71,6 +71,60 @@
         }
       }
     },
+    "SolutionTypes": {
+      "badge": "Real Estate Solution Types",
+      "title": "Main Types of Real Estate Solutions",
+      "description": "Real estate solutions include a diverse range of services designed to meet the needs of all segments of society",
+      "categories": {
+        "financing": {
+          "title": "Real Estate Financing Solutions",
+          "items": {
+            "subsidized": {
+              "name": "Subsidized Financing",
+              "desc": "Programs that provide government support to facilitate obtaining the first home"
+            },
+            "landLoan": {
+              "name": "Land & Loan Product",
+              "desc": "Helps the client purchase land and obtain financing to build on it simultaneously"
+            },
+            "refinancing": {
+              "name": "Refinancing & Mortgage Release",
+              "desc": "Programs that allow releasing the mortgaged property to obtain new liquidity"
+            },
+            "offPlan": {
+              "name": "Off-Plan Sales",
+              "desc": "Financing residential units that are still under construction"
+            }
+          }
+        },
+        "brokerage": {
+          "title": "Brokerage & Management Services",
+          "items": {
+            "marketing": {
+              "name": "Real Estate Marketing",
+              "desc": "Activities related to promoting properties for sale or rent"
+            },
+            "management": {
+              "name": "Property & Facility Management",
+              "desc": "Providing comprehensive services for property management including maintenance and rent collection"
+            }
+          }
+        },
+        "consulting": {
+          "title": "Real Estate Consulting & Analytics",
+          "items": {
+            "analysis": {
+              "name": "Market Analysis",
+              "desc": "Providing insights and recommendations based on market data analysis"
+            },
+            "investment": {
+              "name": "Investment Consulting",
+              "desc": "Helping investors make sound decisions"
+            }
+          }
+        }
+      }
+    },
     "Services": {
       "title": "Our Products",
       "subtitle": "Choose the solution that suits your needs from real estate brokerage solutions",
