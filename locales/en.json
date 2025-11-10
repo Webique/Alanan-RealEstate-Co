@@ -157,6 +157,29 @@
         }
       }
     },
+    "Process": {
+      "badge": "How We Work",
+      "title": "Steps to Get Financing",
+      "description": "A simple and fast process to get the right real estate financing for you",
+      "steps": {
+        "contact": {
+          "title": "Contact Us",
+          "description": "Contact us via WhatsApp or fill out the request form"
+        },
+        "documents": {
+          "title": "Submit Documents",
+          "description": "Submit required documents and we'll review them"
+        },
+        "consultation": {
+          "title": "Consultation & Evaluation",
+          "description": "We provide you with the best solutions for your needs"
+        },
+        "financing": {
+          "title": "Get Financing",
+          "description": "Get financing and start achieving your dream"
+        }
+      }
+    },
     "Contact": {
       "title": "Contact Us",
       "subtitle": "To submit a financing request, please fill in the following data so that one of our consultants can contact you and work on your request as soon as possible",

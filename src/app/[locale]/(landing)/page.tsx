@@ -3,6 +3,7 @@ import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 
+import ProcessSection from "@/app/[locale]/(landing)/components/process-section";
 import ServicesSection from "@/app/[locale]/(landing)/components/services-section";
 import SolutionsTypesSection from "@/app/[locale]/(landing)/components/solutions-types-section";
 import WhatsAppFloat from "@/components/whats-app-float";
@@ -24,7 +25,7 @@ export default function IndexPage({ params }: PageProps<"/[locale]">) {
       <FeaturesSection />
       <ServicesSection />
       <SolutionsTypesSection />
-      {/* <ProcessSection /> */}
+      <ProcessSection />
       {/* <TestimonialsSection /> */}
       {/* <ContactSection /> */}
       <WhatsAppFloat />

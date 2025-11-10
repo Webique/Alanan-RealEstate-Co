@@ -3,58 +3,55 @@
 import { CheckCircle, FileText, MessageSquare, PhoneCall } from "lucide-react";
 import * as m from "motion/react-m";
 import ExportedImage from "next-image-export-optimizer";
+import { useTranslations } from "next-intl";
 
 export default function ProcessSection() {
+  const t = useTranslations("IndexPage.Process");
+
   const steps = [
     {
       icon: PhoneCall,
       number: "01",
-      titleAr: "تواصل معنا",
-      titleEn: "Contact Us",
-      descAr: "تواصل معنا عبر الواتساب أو املأ نموذج الطلب",
-      descEn: "Contact us via WhatsApp or fill out the request form",
-      gradient: "from-blue-500 to-cyan-500",
+      key: "contact",
       image:
         "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80"
     },
     {
       icon: FileText,
       number: "02",
-      titleAr: "تقديم المستندات",
-      titleEn: "Submit Documents",
-      descAr: "قدم المستندات المطلوبة وسنقوم بمراجعتها",
-      descEn: "Submit required documents and we'll review them",
-      gradient: "from-purple-500 to-pink-500",
+      key: "documents",
       image:
         "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=600&q=80"
     },
     {
       icon: MessageSquare,
       number: "03",
-      titleAr: "الاستشارة والتقييم",
-      titleEn: "Consultation & Evaluation",
-      descAr: "نقدم لك أفضل الحلول المناسبة لاحتياجاتك",
-      descEn: "We provide you with the best solutions for your needs",
-      gradient: "from-green-500 to-emerald-500",
+      key: "consultation",
       image:
         "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&q=80"
     },
     {
       icon: CheckCircle,
       number: "04",
-      titleAr: "الحصول على التمويل",
-      titleEn: "Get Financing",
-      descAr: "احصل على التمويل وابدأ في تحقيق حلمك",
-      descEn: "Get financing and start achieving your dream",
-      gradient: "from-orange-500 to-red-500",
+      key: "financing",
       image:
         "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&q=80"
     }
   ];
 
   return (
-    <section className="from-background to-muted/30 relative overflow-hidden bg-gradient-to-b py-20 lg:py-32">
-      <div className="layout">
+    <section className="bg-background relative overflow-hidden py-20 lg:py-32">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E488F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}
+        />
+      </div>
+
+      <div className="layout relative">
         {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: 30 }}
@@ -70,16 +67,13 @@ export default function ProcessSection() {
             viewport={{ once: true }}
             className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-6 py-2 text-sm font-semibold"
           >
-            كيف نعمل
+            {t("badge")}
           </m.span>
           <h2 className="text-foreground mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">
-            <span className="block">خطوات الحصول على التمويل</span>
-            <span className="text-muted-foreground mt-2 block text-2xl md:text-3xl">
-              Steps to Get Financing
-            </span>
+            {t("title")}
           </h2>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed">
-            عملية بسيطة وسريعة للحصول على التمويل العقاري المناسب لك
+            {t("description")}
           </p>
         </m.div>
 
@@ -90,29 +84,28 @@ export default function ProcessSection() {
             return (
               <m.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="group relative"
               >
                 <m.div
-                  className="bg-card relative h-full overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-2xl"
-                  whileHover={{ y: -8 }}
+                  className="bg-card relative h-full overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-xl"
+                  whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   {/* Image Background */}
                   <div className="relative h-48 overflow-hidden">
                     <ExportedImage
                       src={step.image}
-                      alt={step.titleAr}
+                      alt={t(`steps.${step.key}.title` as any)}
                       fill
-                      className="object-cover transition-transform group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                       unoptimized
                     />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-80`}
-                    />
+                    {/* Gradient Overlay */}
+                    <div className="from-primary/70 to-primary/50 absolute inset-0 bg-gradient-to-br" />
 
                     {/* Step Number */}
                     <div className="absolute right-4 top-4">
@@ -126,36 +119,28 @@ export default function ProcessSection() {
                     {/* Icon */}
                     <div className="absolute bottom-4 left-4">
                       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg">
-                        <Icon
-                          className={`h-7 w-7 bg-gradient-to-br ${step.gradient} bg-clip-text text-transparent`}
-                        />
+                        <Icon className="text-primary h-7 w-7" />
                       </div>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-foreground mb-2 text-xl font-bold">
-                      {step.titleAr}
+                    <h3 className="text-foreground mb-3 text-xl font-bold">
+                      {t(`steps.${step.key}.title` as any)}
                     </h3>
-                    <p className="text-muted-foreground mb-3 text-sm font-semibold">
-                      {step.titleEn}
-                    </p>
-                    <p className="text-muted-foreground mb-2 text-sm leading-relaxed">
-                      {step.descAr}
-                    </p>
-                    <p className="text-muted-foreground/70 text-xs leading-relaxed">
-                      {step.descEn}
+                    <p className="text-muted-foreground leading-relaxed">
+                      {t(`steps.${step.key}.description` as any)}
                     </p>
                   </div>
 
                   {/* Hover Effect */}
-                  <div className="from-primary/5 to-secondary/5 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
+                  <div className="from-primary/5 to-primary/10 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
                 </m.div>
 
-                {/* Connector Line (except for last item) */}
+                {/* Connector Line (except for last item on desktop) */}
                 {index < steps.length - 1 && (
-                  <div className="from-primary to-secondary absolute -right-4 top-24 hidden h-0.5 w-8 bg-gradient-to-r lg:block" />
+                  <div className="from-primary to-primary/50 absolute -right-4 top-24 hidden h-0.5 w-8 bg-gradient-to-r lg:block" />
                 )}
               </m.div>
             );
