@@ -20,49 +20,37 @@ export default function ServicesSection() {
   const services = [
     {
       icon: Home,
-      title: t("items.propertyPurchase.title"),
-      description: t("items.propertyPurchase.description"),
-      gradient: "from-blue-500 to-cyan-500",
+      key: "propertyPurchase",
       image:
         "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80"
     },
     {
       icon: Landmark,
-      title: t("items.propertyMortgage.title"),
-      description: t("items.propertyMortgage.description"),
-      gradient: "from-purple-500 to-pink-500",
+      key: "propertyMortgage",
       image:
         "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&q=80"
     },
     {
       icon: Building2,
-      title: t("items.landAndLoan.title"),
-      description: t("items.landAndLoan.description"),
-      gradient: "from-green-500 to-emerald-500",
+      key: "landAndLoan",
       image:
         "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80"
     },
     {
       icon: Hammer,
-      title: t("items.completionConstruction.title"),
-      description: t("items.completionConstruction.description"),
-      gradient: "from-orange-500 to-red-500",
+      key: "completionConstruction",
       image:
         "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
     },
     {
       icon: Building,
-      title: t("items.selfConstruction.title"),
-      description: t("items.selfConstruction.description"),
-      gradient: "from-indigo-500 to-blue-500",
+      key: "selfConstruction",
       image:
         "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80"
     },
     {
       icon: TrendingUp,
-      title: t("items.commercialFinancing.title"),
-      description: t("items.commercialFinancing.description"),
-      gradient: "from-yellow-500 to-orange-500",
+      key: "commercialFinancing",
       image:
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
     }
@@ -71,14 +59,19 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="bg-muted/30 relative overflow-hidden py-20 lg:py-32"
+      className="bg-background relative overflow-hidden py-20 lg:py-32"
     >
-      {/* Background Decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="bg-grid-pattern absolute inset-0" />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E488F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}
+        />
       </div>
 
-      <div className="layout relative z-10">
+      <div className="layout relative">
         {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: 30 }}
@@ -92,7 +85,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="bg-secondary/10 text-secondary mb-4 inline-block rounded-full px-6 py-2 text-sm font-semibold"
+            className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-6 py-2 text-sm font-semibold"
           >
             {t("title")}
           </m.span>
@@ -100,7 +93,7 @@ export default function ServicesSection() {
             {t("subtitle")}
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            <span className="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700 dark:bg-green-900/30 dark:text-green-400">
+            <span className="bg-primary/10 text-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold">
               ✓ {t("note")}
             </span>
           </p>
@@ -113,52 +106,49 @@ export default function ServicesSection() {
             return (
               <m.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative"
+                className="group"
               >
                 <m.div
                   className="bg-card relative h-full overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-2xl"
-                  whileHover={{ y: -8 }}
+                  whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   {/* Image Header */}
                   <div className="relative h-48 overflow-hidden">
                     <ExportedImage
                       src={service.image}
-                      alt={service.title}
+                      alt={t(`items.${service.key}.title` as any)}
                       fill
-                      className="object-cover transition-transform group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                       unoptimized
                     />
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-60`}
-                    />
+                    {/* Gradient Overlay */}
+                    <div className="from-primary/60 to-primary/40 absolute inset-0 bg-gradient-to-br" />
 
-                    {/* Icon Overlay */}
+                    {/* Icon Badge */}
                     <m.div
-                      className="absolute bottom-4 right-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-lg"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="absolute bottom-4 right-4 flex h-14 w-14 items-center justify-center rounded-xl bg-white shadow-lg"
+                      whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
-                      <Icon
-                        className={`h-8 w-8 bg-gradient-to-br ${service.gradient} bg-clip-text text-transparent`}
-                      />
+                      <Icon className="text-primary h-7 w-7" />
                     </m.div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-8">
+                  <div className="p-6">
                     {/* Title */}
-                    <h3 className="text-foreground mb-4 text-xl font-bold">
-                      {service.title}
+                    <h3 className="text-foreground mb-3 text-xl font-bold">
+                      {t(`items.${service.key}.title` as any)}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {service.description}
+                    <p className="text-muted-foreground mb-6 line-clamp-3 leading-relaxed">
+                      {t(`items.${service.key}.description` as any)}
                     </p>
 
                     {/* CTA Button */}
@@ -166,17 +156,17 @@ export default function ServicesSection() {
                       href={siteConfig.links.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary hover:text-secondary inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+                      className="text-primary hover:text-primary/80 inline-flex items-center gap-2 text-sm font-semibold transition-colors"
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
                       {t("requestService")}
-                      <span className="text-lg">←</span>
+                      <span className="text-lg rtl:rotate-180">→</span>
                     </m.a>
                   </div>
 
                   {/* Hover Effect */}
-                  <div className="from-primary/5 to-secondary/5 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
+                  <div className="from-primary/5 to-primary/10 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
                 </m.div>
               </m.div>
             );
