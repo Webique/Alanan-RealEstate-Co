@@ -2,6 +2,78 @@
   "IndexPage": {
     "WhatsAppFloat": {
       "tooltip": "Contact us via WhatsApp"
+    },
+    "Hero": {
+      "title": "Anan Real Estate Solutions",
+      "subtitle": "Your Trusted Partner in Real Estate Brokerage Solutions",
+      "description": "Innovating more real estate consulting solutions to enable Saudi families to own suitable housing for their needs",
+      "cta": "Request Service Now",
+      "learnMore": "Learn More"
+    },
+    "About": {
+      "title": "About Us",
+      "subtitle": "Anan Real Estate Solutions",
+      "description": "One of the pioneering companies that created solutions for all segments of society, honored to serve thousands of clients over 5 years, earning their satisfaction and helping them obtain their dream homes.",
+      "history": "Anan Real Estate Company started in 2020 as a company specialized in providing advisory services for nearly five years. During this period, the company achieved accomplishments and successes that made it one of the leading companies in this field and captured a large market share; the driving force was and still is to provide the best service to its clients through a highly competent and experienced team.",
+      "vision": {
+        "title": "Our Vision",
+        "description": "To be the first destination for those seeking real estate consulting in the Kingdom of Saudi Arabia and to provide distinguished service to our clients in the Kingdom."
+      },
+      "mission": {
+        "title": "Our Goal",
+        "description": "To innovate more real estate consulting solutions to enable Saudi families to own suitable housing for their needs and enhance their financial capabilities by studying available programs and providing the optimal solution for them."
+      },
+      "workingHours": {
+        "title": "Working Hours",
+        "days": "Sunday - Thursday",
+        "hours": "9 AM - 6 PM",
+        "location": "Riyadh, Al Wurud District, Al Olaya Street",
+        "postalCode": "Postal Code 12215"
+      }
+    },
+    "Services": {
+      "title": "Our Products",
+      "subtitle": "Choose the solution that suits your needs from real estate brokerage solutions",
+      "note": "All solutions are Sharia-compliant",
+      "requestService": "Request Product",
+      "items": {
+        "propertyPurchase": {
+          "title": "Property Purchase",
+          "description": "Highest real estate financing to purchase property (completed or incomplete) with the lowest profit margin and down payment savings throughout the Kingdom"
+        },
+        "propertyMortgage": {
+          "title": "Property Mortgage",
+          "description": "Get liquidity secured by property to purchase another property, renovate and renew property, or release property mortgage and refinance to complete building your property or purchase another property with affordable monthly installments"
+        },
+        "landAndLoan": {
+          "title": "Land and Loan",
+          "description": "Choose the land you want without being restricted to any plans, we provide you with the necessary financing to purchase it and the necessary financing to build your home in the way that suits you"
+        },
+        "completionConstruction": {
+          "title": "Construction Completion",
+          "description": "Get the necessary liquidity to build your land or complete building an incomplete property"
+        },
+        "selfConstruction": {
+          "title": "Self-Construction",
+          "description": "We provide you with the necessary financing to build your dream home by mortgaging the land or incomplete property in the form of payments according to construction stages or as a single payment"
+        },
+        "commercialFinancing": {
+          "title": "Commercial Financing",
+          "description": "If you are a business owner and want to expand your business, we provide you with a commercial loan, requiring the presence of points of sale, financial statements, and account statement for one year"
+        }
+      }
+    },
+    "Contact": {
+      "title": "Contact Us",
+      "subtitle": "To submit a financing request, please fill in the following data so that one of our consultants can contact you and work on your request as soon as possible",
+      "form": {
+        "name": "Your Name",
+        "phone": "Mobile Number",
+        "email": "Email Address",
+        "message": "Please describe your request",
+        "submit": "Submit",
+        "privacy": "By clicking submit, you agree to the Privacy Policy"
+      }
     }
   },
   "Error": {

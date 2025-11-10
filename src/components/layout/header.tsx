@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <m.header
-      className="fixed left-0 right-0 top-0 z-50 border-gray-200 bg-white/80 shadow-sm backdrop-blur-md"
+      className="border-border/50 bg-background/80 fixed left-0 right-0 top-0 z-50 border-b shadow-sm backdrop-blur-md"
       animate={{
         transform: pinned ? "translateY(0)" : "translateY(-100%)"
       }}
@@ -84,7 +84,7 @@ export default function Header() {
                 href={siteConfig.links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#001F3F] to-[#1E488F] px-6 py-3 text-sm font-semibold text-[#F6F7ED] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:flex"
+                className="from-primary to-secondary hidden items-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:flex"
               >
                 <Phone className="size-4" />
                 {t("cta")}
@@ -174,7 +174,7 @@ export default function Header() {
                   rel="noopener noreferrer"
                   href={siteConfig.links.whatsapp}
                   onClick={() => setIsMenuOpen(false)}
-                  className="from-primary to-primary/70 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 text-sm font-semibold text-[#F6F7ED] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="from-primary to-secondary flex items-center justify-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <Phone className="size-4" />
                   {t("cta")}
