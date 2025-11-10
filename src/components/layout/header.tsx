@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <m.header
-      className="border-border/50 bg-background/80 fixed left-0 right-0 top-0 z-50 border-b shadow-sm backdrop-blur-md"
+      className="border-border/50 bg-background/60 fixed left-0 right-0 top-0 z-50 shadow-sm backdrop-blur-md"
       animate={{
         transform: pinned ? "translateY(0)" : "translateY(-100%)"
       }}

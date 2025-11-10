@@ -69,7 +69,7 @@ export default function AboutSection() {
         >
           <div className="group relative h-[500px] overflow-hidden rounded-3xl shadow-2xl">
             <ExportedImage
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
+              src="/images/about.jpeg"
               alt="Anan Real Estate"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"

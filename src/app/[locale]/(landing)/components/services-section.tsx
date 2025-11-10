@@ -1,12 +1,12 @@
 "use client";
 
 import {
-    Building,
-    Building2,
-    Hammer,
-    Home,
-    Landmark,
-    TrendingUp
+  Building,
+  Building2,
+  Hammer,
+  Home,
+  Landmark,
+  TrendingUp
 } from "lucide-react";
 import * as m from "motion/react-m";
 import ExportedImage from "next-image-export-optimizer";
@@ -21,38 +21,32 @@ export default function ServicesSection() {
     {
       icon: Home,
       key: "propertyPurchase",
-      image:
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80"
+      image: "/images/services/1.jpeg"
     },
     {
       icon: Landmark,
       key: "propertyMortgage",
-      image:
-        "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=600&q=80"
+      image: "/images/services/2.jpeg"
     },
     {
       icon: Building2,
       key: "landAndLoan",
-      image:
-        "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80"
+      image: "/images/services/3.jpeg"
     },
     {
       icon: Hammer,
       key: "completionConstruction",
-      image:
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+      image: "/images/services/4.jpeg"
     },
     {
       icon: Building,
       key: "selfConstruction",
-      image:
-        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80"
+      image: "/images/services/5.jpeg"
     },
     {
       icon: TrendingUp,
       key: "commercialFinancing",
-      image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+      image: "/images/services/6.jpeg"
     }
   ];
 
@@ -127,7 +121,7 @@ export default function ServicesSection() {
                       unoptimized
                     />
                     {/* Gradient Overlay */}
-                    <div className="from-primary/60 to-primary/40 absolute inset-0 bg-gradient-to-br" />
+                    <div className="from-primary/30 to-primary/20 absolute inset-0 bg-gradient-to-br" />
 
                     {/* Icon Badge */}
                     <m.div

@@ -12,22 +12,19 @@ export default function SolutionsTypesSection() {
     {
       icon: Calculator,
       key: "financing",
-      image:
-        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
+      image: "/images/solutions/1.jpeg",
       items: ["subsidized", "landLoan", "refinancing", "offPlan"]
     },
     {
       icon: HandshakeIcon,
       key: "brokerage",
-      image:
-        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
+      image: "/images/solutions/2.jpeg",
       items: ["marketing", "management"]
     },
     {
       icon: FileText,
       key: "consulting",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      image: "/images/solutions/3.jpeg",
       items: ["analysis", "investment"]
     }
   ];
@@ -98,7 +95,7 @@ export default function SolutionsTypesSection() {
                       unoptimized
                     />
                     {/* Gradient Overlay */}
-                    <div className="from-primary/60 to-primary/40 absolute inset-0 bg-gradient-to-br" />
+                    <div className="from-primary/30 to-primary/20 absolute inset-0 bg-gradient-to-br" />
 
                     {/* Icon Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center">

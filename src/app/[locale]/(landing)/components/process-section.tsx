@@ -13,29 +13,25 @@ export default function ProcessSection() {
       icon: PhoneCall,
       number: "01",
       key: "contact",
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80"
+      image: "/images/process/1.jpeg"
     },
     {
       icon: FileText,
       number: "02",
       key: "documents",
-      image:
-        "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=600&q=80"
+      image: "/images/process/2.jpeg"
     },
     {
       icon: MessageSquare,
       number: "03",
       key: "consultation",
-      image:
-        "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&q=80"
+      image: "/images/process/3.jpeg"
     },
     {
       icon: CheckCircle,
       number: "04",
       key: "financing",
-      image:
-        "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=600&q=80"
+      image: "/images/process/4.jpeg"
     }
   ];
 
@@ -105,7 +101,7 @@ export default function ProcessSection() {
                       unoptimized
                     />
                     {/* Gradient Overlay */}
-                    <div className="from-primary/70 to-primary/50 absolute inset-0 bg-gradient-to-br" />
+                    <div className="from-primary/30 to-primary/20 absolute inset-0 bg-gradient-to-br" />
 
                     {/* Step Number */}
                     <div className="absolute right-4 top-4">

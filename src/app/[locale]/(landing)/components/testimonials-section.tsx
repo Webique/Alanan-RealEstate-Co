@@ -9,9 +9,9 @@ export default function TestimonialsSection() {
   const t = useTranslations("IndexPage.Testimonials");
 
   const testimonialImages = [
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
-    "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80"
+    "/images/user.png",
+    "/images/user.png",
+    "/images/user.png"
   ];
 
   return (
@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231E488F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
           }}
         />
       </div>
@@ -75,7 +75,7 @@ export default function TestimonialsSection() {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="text-primary fill-primary h-5 w-5"
+                        className="h-5 w-5 fill-yellow-500 text-yellow-500"
                       />
                     ))}
                   </div>

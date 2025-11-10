@@ -41,7 +41,7 @@ export default function HeroSection() {
         className="absolute inset-0 z-0"
       >
         <ExportedImage
-          src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1920&q=80"
+          src="/images/hero.jpeg"
           alt="Real Estate Background"
           fill
           className="object-cover brightness-50"
@@ -51,7 +51,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Gradient Overlays */}
-      <div className="from-primary/30 via-primary/20 absolute inset-0 z-10 bg-gradient-to-br to-transparent" />
+      <div className="from-primary/20 via-primary/10 absolute inset-0 z-10 bg-gradient-to-br to-transparent" />
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
       {/* Animated Light Orbs */}
