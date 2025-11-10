@@ -211,8 +211,15 @@
         "phone": "Mobile Number",
         "email": "Email Address",
         "message": "Please describe your request",
-        "submit": "Submit",
-        "privacy": "By clicking submit, you agree to the Privacy Policy"
+        "submit": "Submit Request",
+        "submitting": "Submitting...",
+        "privacy": "By clicking submit request, you agree to the Privacy Policy"
+      },
+      "info": {
+        "phone": "Phone",
+        "email": "Email",
+        "location": "Location",
+        "address": "Riyadh, Al Wurud District"
       }
     }
   },
