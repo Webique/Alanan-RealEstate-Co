@@ -180,6 +180,29 @@
         }
       }
     },
+    "Testimonials": {
+      "badge": "Client Testimonials",
+      "title": "What Our Clients Say",
+      "description": "We are proud of our clients' trust and satisfaction with our services",
+      "trustBadge": "5/5 rating from over 1000 satisfied clients",
+      "items": [
+        {
+          "name": "Ahmed Al-Malki",
+          "role": "Client - Property Purchase",
+          "text": "Amazing experience with Anan Real Estate Solutions. Very professional team who helped me get the best financing for my dream home. Highly recommend!"
+        },
+        {
+          "name": "Fatima Al-Otaibi",
+          "role": "Client - Self-Construction",
+          "text": "Excellent and fast service. They helped me get financing to build my home in an easy and comfortable way. Thanks to Anan team for professionalism and transparency."
+        },
+        {
+          "name": "Mohammed Al-Saeed",
+          "role": "Client - Land & Loan",
+          "text": "Best real estate consulting company I've dealt with. They provided me with land and loan solution with the best terms. Cooperative team that understands client needs."
+        }
+      ]
+    },
     "Contact": {
       "title": "Contact Us",
       "subtitle": "To submit a financing request, please fill in the following data so that one of our consultants can contact you and work on your request as soon as possible",
