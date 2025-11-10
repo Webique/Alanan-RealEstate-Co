@@ -213,12 +213,19 @@
         "message": "Please describe your request",
         "submit": "Submit Request",
         "submitting": "Submitting...",
+        "optional": "optional",
         "privacy": "By clicking submit request, you agree to the Privacy Policy",
         "validation": {
           "nameMin": "Name must be at least 2 characters",
           "phoneMin": "Please enter a valid phone number",
           "emailInvalid": "Please enter a valid email address",
           "messageMin": "Message must be at least 10 characters"
+        },
+        "whatsapp": {
+          "name": "Name",
+          "phone": "Phone",
+          "email": "Email",
+          "request": "Request"
         }
       },
       "info": {

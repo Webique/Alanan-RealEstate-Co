@@ -28,9 +28,13 @@ const createFormSchema = (t: any) =>
     phone: z.string().min(10, {
       message: t("form.validation.phoneMin")
     }),
-    email: z.string().email({
-      message: t("form.validation.emailInvalid")
-    }),
+    email: z
+      .string()
+      .email({
+        message: t("form.validation.emailInvalid")
+      })
+      .optional()
+      .or(z.literal("")),
     message: z.string().min(10, {
       message: t("form.validation.messageMin")
     })
@@ -56,7 +60,10 @@ export default function ContactSection() {
     // Simulate submission delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const whatsappMessage = `الاسم: ${values.name}%0Aالجوال: ${values.phone}%0Aالبريد: ${values.email}%0Aالطلب: ${values.message}`;
+    const emailPart = values.email
+      ? `%0A${t("form.whatsapp.email")}: ${values.email}`
+      : "";
+    const whatsappMessage = `${t("form.whatsapp.name")}: ${values.name}%0A${t("form.whatsapp.phone")}: ${values.phone}${emailPart}%0A${t("form.whatsapp.request")}: ${values.message}`;
     window.open(
       `https://wa.me/${siteConfig.support.whatsapp}?text=${whatsappMessage}`,
       "_blank"
@@ -242,7 +249,12 @@ export default function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t("form.email")}</FormLabel>
+                          <FormLabel>
+                            {t("form.email")}{" "}
+                            <span className="text-muted-foreground text-xs">
+                              ({t("form.optional")})
+                            </span>
+                          </FormLabel>
                           <FormControl>
                             <Input
                               type="email"
