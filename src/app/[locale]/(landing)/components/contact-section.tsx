@@ -1,40 +1,68 @@
 "use client";
 
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, Mail, MapPin, Phone, Send } from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 
+const createFormSchema = (t: any) =>
+  z.object({
+    name: z.string().min(2, {
+      message: t("form.validation.nameMin")
+    }),
+    phone: z.string().min(10, {
+      message: t("form.validation.phoneMin")
+    }),
+    email: z.string().email({
+      message: t("form.validation.emailInvalid")
+    }),
+    message: z.string().min(10, {
+      message: t("form.validation.messageMin")
+    })
+  });
+
 export default function ContactSection() {
   const t = useTranslations("IndexPage.Contact");
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: ""
+
+  const formSchema = createFormSchema(t);
+  type FormValues = z.infer<typeof formSchema>;
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+      message: ""
+    }
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  const onSubmit = async (values: FormValues) => {
     // Simulate submission delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const whatsappMessage = `الاسم: ${formData.name}%0Aالجوال: ${formData.phone}%0Aالبريد: ${formData.email}%0Aالطلب: ${formData.message}`;
+    const whatsappMessage = `الاسم: ${values.name}%0Aالجوال: ${values.phone}%0Aالبريد: ${values.email}%0Aالطلب: ${values.message}`;
     window.open(
       `https://wa.me/${siteConfig.support.whatsapp}?text=${whatsappMessage}`,
       "_blank"
     );
 
-    setIsSubmitting(false);
+    form.reset();
   };
 
   const contactInfo = [
@@ -59,12 +87,12 @@ export default function ContactSection() {
   ];
 
   return (
-    <section
-      id="contact"
-      className="bg-muted/30 relative overflow-hidden py-20 lg:py-32"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
+    <section id="contact" className="relative overflow-hidden py-20 lg:py-32">
+      {/* Gradient Background */}
+      <div className="from-primary/5 via-background to-primary/10 absolute inset-0 bg-gradient-to-br" />
+
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
         <div
           className="absolute inset-0"
           style={{
@@ -72,6 +100,10 @@ export default function ContactSection() {
           }}
         />
       </div>
+
+      {/* Decorative Blobs */}
+      <div className="bg-primary/10 absolute -left-20 top-20 h-72 w-72 rounded-full blur-3xl" />
+      <div className="bg-primary/10 absolute -right-20 bottom-20 h-72 w-72 rounded-full blur-3xl" />
 
       <div className="layout relative">
         {/* Section Header */}
@@ -82,16 +114,17 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <m.span
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-6 py-2 text-sm font-semibold"
+            className="bg-primary/10 text-primary mb-4 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold"
           >
+            <Send className="h-4 w-4" />
             {t("title")}
-          </m.span>
-          <h2 className="text-foreground mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">
+          </m.div>
+          <h2 className="from-foreground to-foreground/70 mb-6 bg-gradient-to-br bg-clip-text text-3xl font-bold text-transparent md:text-4xl lg:text-5xl">
             {t("title")}
           </h2>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg leading-relaxed">
@@ -120,13 +153,16 @@ export default function ContactSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-card group flex flex-col items-center gap-3 rounded-2xl p-6 text-center shadow-lg transition-all hover:shadow-xl"
-                  whileHover={{ y: -5 }}
+                  className="border-border/50 bg-card/50 hover:border-primary/50 hover:bg-card hover:shadow-primary/5 group relative flex flex-col items-center gap-3 overflow-hidden rounded-2xl border p-6 text-center backdrop-blur-sm transition-all hover:shadow-xl"
+                  whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <div className="bg-primary/10 flex h-14 w-14 items-center justify-center rounded-xl">
-                    <Icon className="text-primary h-7 w-7" />
+                  {/* Gradient overlay on hover */}
+                  <div className="from-primary/5 absolute inset-0 bg-gradient-to-br to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="from-primary/20 to-primary/5 relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br transition-transform group-hover:scale-110">
+                    <Icon className="text-primary h-8 w-8 transition-transform group-hover:scale-110" />
                   </div>
-                  <div>
+                  <div className="relative">
                     <p className="text-muted-foreground mb-1 text-sm font-semibold">
                       {info.title}
                     </p>
@@ -146,97 +182,130 @@ export default function ContactSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-card rounded-3xl p-8 shadow-lg lg:p-12">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {/* Name Field */}
-                  <div className="space-y-2">
-                    <Label htmlFor="name">{t("form.name")}</Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      placeholder={t("form.name")}
-                      disabled={isSubmitting}
-                    />
-                  </div>
+            <div className="border-border/50 bg-card/50 relative overflow-hidden rounded-3xl border p-8 shadow-2xl backdrop-blur-sm lg:p-12">
+              {/* Decorative gradient */}
+              <div className="bg-primary/10 absolute -right-20 -top-20 h-40 w-40 rounded-full blur-3xl" />
+              <div className="bg-primary/10 absolute -bottom-20 -left-20 h-40 w-40 rounded-full blur-3xl" />
 
-                  {/* Phone Field */}
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">{t("form.phone")}</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      placeholder={t("form.phone")}
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                </div>
-
-                {/* Email Field */}
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t("form.email")}</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    placeholder={t("form.email")}
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                {/* Message Field */}
-                <div className="space-y-2">
-                  <Label htmlFor="message">{t("form.message")}</Label>
-                  <Textarea
-                    id="message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    placeholder={t("form.message")}
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="from-primary to-primary/80 h-auto w-full rounded-xl bg-gradient-to-r px-8 py-4 text-base font-semibold shadow-lg transition-all hover:shadow-xl has-[>svg]:px-6"
+              <div className="relative">
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
                   >
-                    {isSubmitting ? (
-                      <span>{t("form.submitting" as any)}</span>
-                    ) : (
-                      <>
-                        {t("form.submit")}
-                        <ArrowRight className="size-5 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
-                      </>
-                    )}
-                  </Button>
-                </m.div>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      {/* Name Field */}
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t("form.name")}</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder={t("form.name")}
+                                {...field}
+                                disabled={form.formState.isSubmitting}
+                                className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl transition-all"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                {/* Privacy Notice */}
-                <p className="text-muted-foreground text-center text-xs leading-relaxed">
-                  {t("form.privacy")}
-                </p>
-              </form>
+                      {/* Phone Field */}
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>{t("form.phone")}</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="tel"
+                                placeholder={t("form.phone")}
+                                {...field}
+                                disabled={form.formState.isSubmitting}
+                                className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl transition-all"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Email Field */}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t("form.email")}</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder={t("form.email")}
+                              {...field}
+                              disabled={form.formState.isSubmitting}
+                              className="border-border/50 bg-background/50 focus:border-primary focus:bg-background h-12 rounded-xl transition-all"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Message Field */}
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>{t("form.message")}</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder={t("form.message")}
+                              rows={5}
+                              {...field}
+                              disabled={form.formState.isSubmitting}
+                              className="border-border/50 bg-background/50 focus:border-primary focus:bg-background resize-none rounded-xl transition-all"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Submit Button */}
+                    <m.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button
+                        type="submit"
+                        disabled={form.formState.isSubmitting}
+                        className="from-primary to-primary/80 hover:shadow-primary/20 group h-auto w-full rounded-xl bg-gradient-to-r px-8 py-4 text-base font-semibold shadow-lg transition-all hover:shadow-xl"
+                      >
+                        {form.formState.isSubmitting ? (
+                          <span>{t("form.submitting" as any)}</span>
+                        ) : (
+                          <>
+                            {t("form.submit")}
+                            <ArrowRight className="size-5 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+                          </>
+                        )}
+                      </Button>
+                    </m.div>
+
+                    {/* Privacy Notice */}
+                    <p className="text-muted-foreground text-center text-xs leading-relaxed">
+                      {t("form.privacy")}
+                    </p>
+                  </form>
+                </Form>
+              </div>
             </div>
           </m.div>
         </div>

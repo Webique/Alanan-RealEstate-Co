@@ -19,10 +19,10 @@ const Footer = () => {
   ];
 
   const services = [
-    { label: t("realEstateServices"), href: "#services" },
-    { label: t("propertyManagement"), href: "#services" },
-    { label: t("realEstateMarketing"), href: "#services" },
-    { label: t("realEstateConsulting"), href: "#services" }
+    { label: t("propertyPurchase"), href: "#services" },
+    { label: t("propertyMortgage"), href: "#services" },
+    { label: t("landAndLoan"), href: "#services" },
+    { label: t("selfConstruction"), href: "#services" }
   ];
 
   // const socialLinks = [

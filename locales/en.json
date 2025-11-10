@@ -213,7 +213,13 @@
         "message": "Please describe your request",
         "submit": "Submit Request",
         "submitting": "Submitting...",
-        "privacy": "By clicking submit request, you agree to the Privacy Policy"
+        "privacy": "By clicking submit request, you agree to the Privacy Policy",
+        "validation": {
+          "nameMin": "Name must be at least 2 characters",
+          "phoneMin": "Please enter a valid phone number",
+          "emailInvalid": "Please enter a valid email address",
+          "messageMin": "Message must be at least 10 characters"
+        }
       },
       "info": {
         "phone": "Phone",
@@ -279,34 +285,15 @@
   "Footer": {
     "home": "Home",
     "about": "About Us",
-    "vision": "Vision and Mission",
-    "identity": "Corporate Identity",
-    "location": "Our Location",
     "quickLinks": "Quick Links",
-    "services": "Our Services",
+    "services": "Our Products",
     "contactUs": "Contact Us",
-    "clients": "Our Clients",
-    "testimonials": "Client Testimonials",
-    "available24_7": "Available 24/7",
-    "connectViaWhatsApp": "Contact us via WhatsApp",
-    "copyright": "© {year} Arkan Al Dar Al Mutaqadima. All rights reserved",
-    "companyDescription": "We specialize in providing comprehensive and innovative real estate solutions, with a focus on transparency, professionalism, and reliability in serving our clients",
-    "realEstateServices": "Buying and Selling Services",
-    "propertyManagement": "Property Management",
-    "realEstateMarketing": "Real Estate Marketing",
-    "realEstateConsulting": "Real Estate Consulting",
-    "socialMedia": {
-      "whatsapp": "WhatsApp",
-      "x": "X",
-      "instagram": "Instagram",
-      "linkedin": "LinkedIn",
-      "facebook": "Facebook",
-      "tiktok": "TikTok",
-      "email": "Email"
-    },
-    "ourLocation": "Our Location on Map",
-    "saudiArabia": "Kingdom of Saudi Arabia",
-    "license": "FAL License",
-    "unifiedNumber": "Unified Number"
+    "copyright": "© {year} Anan Real Estate Solutions. All rights reserved",
+    "companyDescription": "One of the pioneering companies that created solutions for all segments of society, honored to serve thousands of clients over 5 years, earning their satisfaction and helping them obtain their dream homes.",
+    "propertyPurchase": "Property Purchase",
+    "propertyMortgage": "Property Mortgage",
+    "landAndLoan": "Land and Loan",
+    "selfConstruction": "Self-Construction",
+    "saudiArabia": "Kingdom of Saudi Arabia"
   }
 }
