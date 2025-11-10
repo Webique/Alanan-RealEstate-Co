@@ -110,12 +110,9 @@ export default function ContactSection() {
       await Promise.all(promises);
 
       // Show success message with methods used
-      const methodText = methods.join(" & ");
       const successMsg = t("form.success");
-      const sentViaMsg = t("form.sentVia");
 
       toast.success(successMsg, {
-        description: `${sentViaMsg}: ${methodText}`,
         duration: 5000
       });
 
