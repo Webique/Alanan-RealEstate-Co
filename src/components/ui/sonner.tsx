@@ -33,7 +33,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           description: "group-[.toast]:!text-primary-foreground/90 text-base",
           title: "!leading-6 !font-normal",
           actionButton:
-            "group-[.toast]:bg-primary-foreground group-[.toast]:text-primary group-[.toast]:font-semibold group-[.toast]:px-4 group-[.toast]:py-2 group-[.toast]:rounded-md text-base",
+            "group-[.toast]:bg-primary-foreground group-[.toast]:text-primary group-[.toast]:font-normal group-[.toast]:px-4 group-[.toast]:py-2 group-[.toast]:rounded-md text-base",
           cancelButton:
             "group-[.toast]:bg-primary-foreground/10 group-[.toast]:text-primary-foreground group-[.toast]:px-4 group-[.toast]:py-2 group-[.toast]:rounded-md hover:group-[.toast]:bg-primary-foreground/20 text-base",
           icon: "group-[.toast]:!text-primary-foreground",
