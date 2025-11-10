@@ -130,7 +130,7 @@ export default function ContactSection() {
                     <p className="text-muted-foreground mb-1 text-sm font-semibold">
                       {info.title}
                     </p>
-                    <p className="text-foreground text-sm font-bold">
+                    <p dir="ltr" className="text-foreground text-sm font-bold">
                       {info.value}
                     </p>
                   </div>
