@@ -74,23 +74,17 @@ export async function generateMetadata({ params }: { params: Params }) {
     },
     icons: {
       icon: [
-        { url: "/favicon.ico" },
         {
-          url: "/favicon/web-app-manifest-192x192.png",
-          sizes: "192x192",
-          type: "image/png"
-        },
-        {
-          url: "/favicon/web-app-manifest-512x512.png",
-          sizes: "512x512",
-          type: "image/png"
+          url: "/images/logo1.png",
+          type: "image/png",
+          sizes: "any"
         }
       ],
       apple: [
         {
-          url: "/favicon/apple-touch-icon.png",
-          sizes: "180x180",
-          type: "image/png"
+          url: "/images/logo1.png",
+          type: "image/png",
+          sizes: "any"
         }
       ]
     },
