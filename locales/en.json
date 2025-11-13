@@ -233,6 +233,11 @@
           "emailInvalid": "Please enter a valid email address",
           "messageMin": "Message must be at least 10 characters",
           "contactRequired": "Please provide either phone number or email address"
+        },
+        "qr": {
+          "title": "Official Documents",
+          "commercialRegistration": "Commercial Registration",
+          "valLicense": "Val License"
         }
       },
       "info": {

@@ -4,7 +4,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 
-import Logo from "@/components/ui/logo";
 import { siteConfig } from "@/config/site";
 
 const Footer = () => {
@@ -70,10 +69,6 @@ const Footer = () => {
             viewport={{ once: true }}
             className="flex flex-col space-y-5"
           >
-            <Logo
-              imgClassName="invert w-32 lg:w-40 brightness-0 saturate-0"
-              className="lg:ps-5"
-            />
             <p className="text-sm leading-relaxed text-gray-400">
               {t("companyDescription")}
             </p>

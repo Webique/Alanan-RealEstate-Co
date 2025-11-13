@@ -21,6 +21,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 
+import ExportedImage from "next-image-export-optimizer";
+
 const createFormSchema = (t: any) =>
   z
     .object({
@@ -146,6 +148,17 @@ export default function ContactSection() {
     }
   ];
 
+  const qrCodes = [
+    {
+      src: "/images/1.jpg",
+      label: t("form.qr.commercialRegistration")
+    },
+    {
+      src: "/images/2.jpg",
+      label: t("form.qr.valLicense")
+    }
+  ];
+
   return (
     <section id="contact" className="relative overflow-hidden py-20 lg:py-32">
       {/* Gradient Background */}
@@ -235,6 +248,44 @@ export default function ContactSection() {
             })}
           </m.div>
 
+          {/* Official Documents */}
+          <m.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <div className="mb-6 text-center">
+              <h3 className="text-foreground text-2xl font-semibold">
+                {t("form.qr.title")}
+              </h3>
+            </div>
+            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+              {qrCodes.map((code) => (
+                <div
+                  key={code.src}
+                  className="border-border/50 bg-card/50 flex flex-col items-center gap-4 rounded-2xl border p-6 text-center shadow-sm backdrop-blur-sm"
+                >
+                  <div className="relative h-48 w-48 overflow-hidden rounded-xl border border-dashed border-primary/40 bg-background">
+                    <ExportedImage
+                      src={code.src}
+                      alt={code.label}
+                      width={400}
+                      height={400}
+                      className="h-full w-full object-contain"
+                      placeholder="empty"
+                      priority={false}
+                    />
+                  </div>
+                  <p className="text-foreground text-sm font-semibold">
+                    {code.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </m.div>
+
           {/* Contact Form */}
           <m.div
             initial={{ opacity: 0, y: 30 }}
@@ -253,15 +304,6 @@ export default function ContactSection() {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-6"
                   >
-                    {/* Helper Text */}
-                    <div className="bg-primary/5 border-primary/20 mb-4 rounded-xl border p-4">
-                      <p className="text-muted-foreground text-center text-sm">
-                        <span className="text-primary font-semibold">
-                          {t("form.contactNote")}
-                        </span>
-                      </p>
-                    </div>
-
                     <div className="grid gap-6 sm:grid-cols-2">
                       {/* Name Field */}
                       <FormField
