@@ -41,7 +41,10 @@ export default function WhatsAppFloat() {
           <Tooltip key={number.dial} delayDuration={0}>
             <TooltipTrigger asChild>
               <a
-                href={number.link ?? `https://wa.me/${number.dial.replace(/\D/g, "")}`}
+                href={
+                  number.link ??
+                  `https://wa.me/${number.dial.replace(/\D/g, "")}`
+                }
                 target="_blank"
                 rel="noreferrer"
                 className={`fixed bottom-6 z-[999999] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl lg:bottom-6 ${position.positionClasses}`}

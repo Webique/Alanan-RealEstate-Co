@@ -15,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+import ExportedImage from "next-image-export-optimizer";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -27,8 +29,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
-
-import ExportedImage from "next-image-export-optimizer";
 
 const createFormSchema = (t: any) =>
   z
@@ -271,13 +271,16 @@ export default function ContactSection() {
                         const key = `${info.title}-${item.label}`;
                         if (item.href) {
                           const isExternal =
-                            item.isExternal || item.href.startsWith("http");
+                            ("isExternal" in item && item.isExternal) ||
+                            item.href.startsWith("http");
                           return (
                             <a
                               key={key}
                               href={item.href}
                               target={isExternal ? "_blank" : undefined}
-                              rel={isExternal ? "noopener noreferrer" : undefined}
+                              rel={
+                                isExternal ? "noopener noreferrer" : undefined
+                              }
                               dir={item.dir ?? "auto"}
                               className="hover:text-primary transition-colors"
                             >
@@ -317,7 +320,7 @@ export default function ContactSection() {
                   key={code.src}
                   className="border-border/50 bg-card/50 flex flex-col items-center gap-4 rounded-2xl border p-6 text-center shadow-sm backdrop-blur-sm"
                 >
-                  <div className="relative h-48 w-48 overflow-hidden rounded-xl border border-dashed border-primary/40 bg-background">
+                  <div className="border-primary/40 bg-background relative h-48 w-48 overflow-hidden rounded-xl border border-dashed">
                     <ExportedImage
                       src={code.src}
                       alt={code.label}
