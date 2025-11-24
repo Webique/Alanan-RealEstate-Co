@@ -138,40 +138,42 @@ const Footer = () => {
             <h3 className="mb-6 text-lg font-bold">{t("contactUs")}</h3>
             <div className="space-y-4">
               {siteConfig.support.phoneNumbers?.length ? (
-                <div className="flex flex-wrap items-center gap-3">
-                  <Phone className="mt-1 h-4 w-4 shrink-0 text-gray-300" />
-                  <div className="flex flex-wrap gap-2">
-                    {siteConfig.support.phoneNumbers.map((phone) => (
-                      <a
-                        key={phone.dial}
-                        href={`tel:${phone.dial}`}
-                        className="border-white/20 bg-white/5 hover:bg-white/10 rounded-full px-4 py-1 text-sm text-gray-200 transition-colors"
-                        dir="ltr"
-                      >
-                        {phone.display}
-                      </a>
-                    ))}
-                  </div>
+                <div className="flex flex-col gap-3">
+                  {siteConfig.support.phoneNumbers.map((phone, index) => (
+                    <a
+                      key={phone.dial}
+                      href={`tel:${phone.dial}`}
+                      className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
+                    >
+                      {index === 0 ? (
+                        <Phone className="mt-1 h-4 w-4 shrink-0" />
+                      ) : (
+                        <span className="mt-1 inline-block h-4 w-4 shrink-0" />
+                      )}
+                      <span dir="ltr">{phone.display}</span>
+                    </a>
+                  ))}
                 </div>
               ) : null}
 
               {siteConfig.support.whatsappNumbers?.length ? (
-                <div className="flex flex-wrap items-center gap-3">
-                  <MessageCircle className="mt-1 h-4 w-4 shrink-0 text-gray-300" />
-                  <div className="flex flex-wrap gap-2">
-                    {siteConfig.support.whatsappNumbers.map((wa) => (
-                      <a
-                        key={wa.dial}
-                        href={wa.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border-white/20 bg-white/5 hover:bg-white/10 rounded-full px-4 py-1 text-sm text-gray-200 transition-colors"
-                        dir="ltr"
-                      >
-                        {wa.display}
-                      </a>
-                    ))}
-                  </div>
+                <div className="flex flex-col gap-3">
+                  {siteConfig.support.whatsappNumbers.map((wa, index) => (
+                    <a
+                      key={wa.dial}
+                      href={wa.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
+                    >
+                      {index === 0 ? (
+                        <MessageCircle className="mt-1 h-4 w-4 shrink-0" />
+                      ) : (
+                        <span className="mt-1 inline-block h-4 w-4 shrink-0" />
+                      )}
+                      <span dir="ltr">{wa.display}</span>
+                    </a>
+                  ))}
                 </div>
               ) : null}
               <a

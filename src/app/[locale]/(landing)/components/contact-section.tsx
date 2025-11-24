@@ -29,7 +29,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 
 import ExportedImage from "next-image-export-optimizer";
-import { cn } from "@/lib/utils";
 
 const createFormSchema = (t: any) =>
   z
@@ -139,7 +138,6 @@ export default function ContactSection() {
     {
       icon: Phone,
       title: t("info.phone"),
-      layout: "row",
       values: siteConfig.support.phoneNumbers.map((phone) => ({
         label: phone.display,
         href: `tel:${phone.dial}`,
@@ -149,7 +147,6 @@ export default function ContactSection() {
     {
       icon: MessageCircle,
       title: t("info.whatsapp"),
-      layout: "row",
       values: siteConfig.support.whatsappNumbers.map((wa) => ({
         label: wa.display,
         href: wa.link,
@@ -269,62 +266,31 @@ export default function ContactSection() {
                     <p className="text-muted-foreground mb-1 text-sm font-semibold">
                       {info.title}
                     </p>
-                    <div
-                      className={cn(
-                        "text-foreground flex flex-col gap-1 text-sm font-bold",
-                        info.layout === "row" && "w-full"
-                      )}
-                    >
-                      {info.layout === "row" ? (
-                        <div className="flex flex-wrap justify-center gap-3">
-                          {info.values?.map((item) => {
-                            const key = `${info.title}-${item.label}`;
-                            const isExternal =
-                              item.isExternal || item.href?.startsWith("http");
-                            return (
-                              <a
-                                key={key}
-                                href={item.href}
-                                target={isExternal ? "_blank" : undefined}
-                                rel={
-                                  isExternal ? "noopener noreferrer" : undefined
-                                }
-                                dir={item.dir ?? "auto"}
-                                className="border-border/60 bg-background/60 hover:border-primary/60 hover:text-primary rounded-full border px-4 py-1 text-xs font-semibold transition-colors"
-                              >
-                                {item.label}
-                              </a>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        info.values?.map((item) => {
-                          const key = `${info.title}-${item.label}`;
-                          if (item.href) {
-                            const isExternal =
-                              item.isExternal || item.href.startsWith("http");
-                            return (
-                              <a
-                                key={key}
-                                href={item.href}
-                                target={isExternal ? "_blank" : undefined}
-                                rel={
-                                  isExternal ? "noopener noreferrer" : undefined
-                                }
-                                dir={item.dir ?? "auto"}
-                                className="hover:text-primary transition-colors"
-                              >
-                                {item.label}
-                              </a>
-                            );
-                          }
+                    <div className="text-foreground flex flex-col gap-2 text-sm font-bold">
+                      {info.values?.map((item) => {
+                        const key = `${info.title}-${item.label}`;
+                        if (item.href) {
+                          const isExternal =
+                            item.isExternal || item.href.startsWith("http");
                           return (
-                            <p key={key} dir={item.dir ?? "auto"}>
+                            <a
+                              key={key}
+                              href={item.href}
+                              target={isExternal ? "_blank" : undefined}
+                              rel={isExternal ? "noopener noreferrer" : undefined}
+                              dir={item.dir ?? "auto"}
+                              className="hover:text-primary transition-colors"
+                            >
                               {item.label}
-                            </p>
+                            </a>
                           );
-                        })
-                      )}
+                        }
+                        return (
+                          <p key={key} dir={item.dir ?? "auto"}>
+                            {item.label}
+                          </p>
+                        );
+                      })}
                     </div>
                   </div>
                 </m.div>
