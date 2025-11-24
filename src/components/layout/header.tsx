@@ -78,27 +78,30 @@ export default function Header() {
 
           {/* CTA  */}
           <m.div
-            className="hidden items-center space-x-3 lg:flex"
+            className="hidden items-center gap-3 lg:flex"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
             <LocaleSwitcher isTop={false} />
 
-            <div className="flex items-center">
-              <Button
-                className="bg-primary hidden h-auto items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-6 lg:flex"
-                asChild
-              >
-                <Link
-                  href={siteConfig.links.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <div className="flex items-center gap-2">
+              {siteConfig.support.whatsappNumbers?.map((wa) => (
+                <Button
+                  key={wa.dial}
+                  className="bg-primary h-auto items-center gap-2 rounded-full px-5 py-3 text-xs font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-5"
+                  asChild
                 >
-                  <Phone className="size-4" />
-                  {t("cta")}
-                </Link>
-              </Button>
+                  <Link
+                    href={wa.link ?? siteConfig.links.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Phone className="size-4" />
+                    <span dir="ltr">{wa.display}</span>
+                  </Link>
+                </Button>
+              ))}
             </div>
           </m.div>
 
@@ -179,20 +182,25 @@ export default function Header() {
                 transition={{ delay: 0.5, duration: 0.4 }}
                 className="border-t pt-4"
               >
-                <Button
-                  className="bg-primary h-auto w-full items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-6"
-                  asChild
-                >
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={siteConfig.links.whatsapp}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Phone className="size-4" />
-                    {t("cta")}
-                  </a>
-                </Button>
+                <div className="flex flex-col gap-3">
+                  {siteConfig.support.whatsappNumbers?.map((wa) => (
+                    <Button
+                      key={wa.dial}
+                      className="bg-primary h-auto w-full items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl has-[>svg]:px-6"
+                      asChild
+                    >
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={wa.link ?? siteConfig.links.whatsapp}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Phone className="size-4" />
+                        <span dir="ltr">{wa.display}</span>
+                      </a>
+                    </Button>
+                  ))}
+                </div>
               </m.div>
             </div>
           </nav>
