@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 
@@ -137,13 +137,28 @@ const Footer = () => {
           >
             <h3 className="mb-6 text-lg font-bold">{t("contactUs")}</h3>
             <div className="space-y-4">
-              <a
-                href={`tel:${siteConfig.support.phone}`}
-                className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
-              >
-                <Phone className="mt-1 h-4 w-4 shrink-0" />
-                <span dir="ltr">{siteConfig.support.phone}</span>
-              </a>
+              {siteConfig.support.phoneNumbers?.map((phone) => (
+                <a
+                  key={phone.dial}
+                  href={`tel:${phone.dial}`}
+                  className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
+                >
+                  <Phone className="mt-1 h-4 w-4 shrink-0" />
+                  <span dir="ltr">{phone.display}</span>
+                </a>
+              ))}
+              {siteConfig.support.whatsappNumbers?.map((wa) => (
+                <a
+                  key={wa.dial}
+                  href={wa.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"
+                >
+                  <MessageCircle className="mt-1 h-4 w-4 shrink-0" />
+                  <span dir="ltr">{wa.display}</span>
+                </a>
+              ))}
               <a
                 href={`mailto:${siteConfig.support.email}`}
                 className="flex items-start gap-3 text-sm text-gray-400 transition-colors hover:text-white"

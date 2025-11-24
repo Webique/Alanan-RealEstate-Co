@@ -1,7 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Mail, MapPin, Phone, Send } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Send
+} from "lucide-react";
 import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -131,20 +138,43 @@ export default function ContactSection() {
     {
       icon: Phone,
       title: t("info.phone"),
-      value: siteConfig.support.phone,
-      href: `tel:${siteConfig.support.phone}`
+      values: siteConfig.support.phoneNumbers.map((phone) => ({
+        label: phone.display,
+        href: `tel:${phone.dial}`,
+        dir: "ltr"
+      }))
+    },
+    {
+      icon: MessageCircle,
+      title: t("info.whatsapp"),
+      values: siteConfig.support.whatsappNumbers.map((wa) => ({
+        label: wa.display,
+        href: wa.link,
+        dir: "ltr",
+        isExternal: true
+      }))
     },
     {
       icon: Mail,
       title: t("info.email"),
-      value: siteConfig.support.email,
-      href: `mailto:${siteConfig.support.email}`
+      values: [
+        {
+          label: siteConfig.support.email,
+          href: `mailto:${siteConfig.support.email}`,
+          dir: "ltr"
+        }
+      ]
     },
     {
       icon: MapPin,
       title: t("info.location"),
-      value: t("info.address"),
-      href: siteConfig.links.googleMap
+      values: [
+        {
+          label: t("info.address"),
+          href: siteConfig.links.googleMap,
+          isExternal: true
+        }
+      ]
     }
   ];
 
@@ -217,11 +247,8 @@ export default function ContactSection() {
             {contactInfo.map((info, index) => {
               const Icon = info.icon;
               return (
-                <m.a
+                <m.div
                   key={index}
-                  href={info.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -239,11 +266,34 @@ export default function ContactSection() {
                     <p className="text-muted-foreground mb-1 text-sm font-semibold">
                       {info.title}
                     </p>
-                    <p dir="ltr" className="text-foreground text-sm font-bold">
-                      {info.value}
-                    </p>
+                    <div className="text-foreground flex flex-col gap-1 text-sm font-bold">
+                      {info.values?.map((item) => {
+                        const key = `${info.title}-${item.label}`;
+                        if (item.href) {
+                          const isExternal =
+                            item.isExternal || item.href.startsWith("http");
+                          return (
+                            <a
+                              key={key}
+                              href={item.href}
+                              target={isExternal ? "_blank" : undefined}
+                              rel={isExternal ? "noopener noreferrer" : undefined}
+                              dir={item.dir ?? "auto"}
+                              className="hover:text-primary transition-colors"
+                            >
+                              {item.label}
+                            </a>
+                          );
+                        }
+                        return (
+                          <p key={key} dir={item.dir ?? "auto"}>
+                            {item.label}
+                          </p>
+                        );
+                      })}
+                    </div>
                   </div>
-                </m.a>
+                </m.div>
               );
             })}
           </m.div>
