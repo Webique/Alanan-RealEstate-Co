@@ -16,7 +16,6 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 import ExportedImage from "next-image-export-optimizer";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -281,7 +280,9 @@ export default function ContactSection() {
                               rel={
                                 isExternal ? "noopener noreferrer" : undefined
                               }
-                              dir={item.dir ?? "auto"}
+                              dir={
+                                "dir" in item ? item.dir ?? "auto" : "auto"
+                              }
                               className="hover:text-primary transition-colors"
                             >
                               {item.label}
@@ -289,7 +290,12 @@ export default function ContactSection() {
                           );
                         }
                         return (
-                          <p key={key} dir={item.dir ?? "auto"}>
+                          <p
+                            key={key}
+                            dir={
+                              "dir" in item ? item.dir ?? "auto" : "auto"
+                            }
+                          >
                             {item.label}
                           </p>
                         );
